@@ -3,10 +3,15 @@ const asyncHandler=require("express-async-handler")
 
 
 exports.movie_list=asyncHandler(async(req,res,next)=>{
-    res.send("Movie List not implemented yet")
+    res.send("Movie list no implemented fsdyet")
+})
+exports.movie_detail=asyncHandler(async(req,res,next)=>{
+    res.send("Movie detail not implemented yet")
 })
 exports.index=asyncHandler(async(req,res,next)=>{
-    res.send("Movie Index not implemented yet")
+    res.render("layout",{
+        title:"Movie list"
+    })
 })
 exports.movie_create_get=asyncHandler(async(req,res,next)=>{
     res.send("Movie Create Get not implemented yet")
