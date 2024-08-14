@@ -2,4 +2,16 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to #{title}, this page consists of various movies ranging from different genres of cinema which can be accessed, bought, or rented. Whether you're a fan of classic films, modern blockbusters, or indie gems, you'll find something to enjoy here. Our collection is curated to include a wide variety of genres, ensuring there's something for everyone. From action-packed thrillers and heartwarming dramas to laugh-out-loud comedies and spine-chilling horror movies, our catalog has it all. You can easily browse through our selection, read reviews, and find the perfect movie for your next movie night. Plus, with options to buy or rent, you have the flexibility to choose how you want to enjoy your favorite films.
+
+  h2 Dynamic content
+
+  p The current record counts of various components are as follows. Our database is constantly updated to reflect the latest additions and changes, ensuring you always have access to the most current information. Whether you're looking for the number of movies, actors, genres, directors, or DVDs available, you'll find the details right here.
+
+  ul
+    li #[strong Movies:] !{movie_count} - Our extensive collection includes a wide range of movies from different genres and eras.
+    li #[strong Actors:] !{actor_count} - Featuring profiles of actors from all over the world, including their filmographies and biographies.
+    li #[strong Genres:] !{genre_count} - Explore movies categorized by genre, making it easy to find films that match your interests.
+    li #[strong Directors:] !{director_count} - Discover the works of renowned directors and learn more about their contributions to cinema.
+    li #[strong Movie DVDs:] !{moviedvd_count} - Our DVD collection includes both new releases and classic titles, available for purchase or rental.
+    li #[strong Available Movie DVDs:] !{available_moviedvd_count} - Check the availability of DVDs in our collection, so you can plan your movie nights without any hassle.

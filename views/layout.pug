@@ -2,35 +2,36 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/styles/style.css')
   body
-    div(class='container-fluid')
-      div(class='row')
-        div(class='col-sm-2')
+  div.content-total
+    div(class='container-fluid sidebar')
           block sidebar
             ul(class='sidebar-nav')
-              li
-                a(href='/catalog/') Home
-              li
+              li.sidebar-item
+                a.active(href='/catalog/') Home
+              li.sidebar-item
                 a(href='/catalog/movies') All Movies
-              li
+              li.sidebar-item
                 a(href='/catalog/directors') All Directors
-              li
+              li.sidebar-item
                 a(href='/catalog/actors') All Actors
-              li
+              li.sidebar-item
                 a(href='/catalog/genres') All genres
-              li
+              li.sidebar-item
                 a(href='/catalog/moviedvds') All Movie DVDs
-              li
+
                 hr
-              li
+
+              li.sidebar-item
                 a(href='/catalog/director/create') Create new Director
-              li
+              li.sidebar-item
                 a(href='/catalog/genre/create') Create new genre
-              li
+              li.sidebar-item
                 a(href='/catalog/actor/create') Create new Actor
-              li
+              li.sidebar-item
                 a(href='/catalog/movie/create') Create new Movie
-              li
+              li.sidebar-item
                 a(href='/catalog/moviedvd/create') Create new DVD listing
-    block content
+    main.content
+      block content
