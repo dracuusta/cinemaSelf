@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  h1.section-title= title
+
+  form(method='POST' action='')
+    .form-group
+      label(for='title') Title:
+      input#title.form-control(type='text', placeholder='Name of movie' name='title' required='true')
+    
+    .form-group
+      label(for='director') Director:
+      select#director.form-control(name='director' required='true')
+        option(value='') Select Director
+        for director in directors
+          option(value=director._id) #{director.first_name} #{director.last_name}
+    
+    .form-group
+      label(for='actors') Actor:
+      select#actor.form-control(name='actor' required='true')
+        option(value='') Select Actor
+        for actor in actors
+          option(value=actor._id) #{actor.first_name} #{actor.last_name}
+    
+    .form-group
+      label(for='genres') Genre:
+      select#genres.form-control(name='genre' required='true' multiple)
+        option(value='') Select Genre
+        for genre in genres
+          option(value=genre._id) #{genre.name}
+    
+    .form-group
+      label(for='summary') Summary:
+      textarea#summary.form-control(placeholder='Summary' name='summary' required='true')
+    
+    .form-group
+      label(for='isbn') ISBN:
+      input#isbn.form-control(type='text', placeholder='ISBN13' name='isbn' required='true')
+    
+    button.btn.btn-primary(type='submit') Create Movie
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1.section-title= title
+  p.welcome-text Welcome to #{title}, this page consists of various movies ranging from different genres of cinema which can be accessed, bought, or rented. Whether you're a fan of classic films, modern blockbusters, or indie gems, you'll find something to enjoy here. Our collection is curated to include a wide variety of genres, ensuring there's something for everyone. From action-packed thrillers and heartwarming dramas to laugh-out-loud comedies and spine-chilling horror movies, our catalog has it all. You can easily browse through our selection, read reviews, and find the perfect movie for your next movie night. Plus, with options to buy or rent, you have the flexibility to choose how you want to enjoy your favorite films.
+
+  h2.section-subtitle Records
+  p The current record counts of various components are as follows.
+  
+  ul.index-list
+    li.index-list-item 
+      span.index-list-item-count !{movie_count}
+      span.index-list-item-label Movies
+    li.index-list-item
+      span.index-list-item-count !{actor_count}
+      span.index-list-item-label Actors
+    li.index-list-item      
+      span.index-list-item-count !{genre_count}
+      span.index-list-item-label Genres
+    li.index-list-item
+      span.index-list-item-count !{director_count}
+      span.index-list-item-label Directors    
+    li.index-list-item
+      span.index-list-item-count !{moviedvd_count}
+      span.index-list-item-label Movie DVDs
+    li.index-list-item 
+      span.index-list-item-count !{available_moviedvd_count}
+      span.index-list-item-label Available Movie DVDs
+
+  .button-group(class="group")
+    a.btn(href="/movies") Browse Movies
+    a.btn.btn-secondary(href="/about") About Us

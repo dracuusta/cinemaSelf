@@ -1,0 +1,37 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/styles/style.css')
+  body
+  div.content-total
+    div(class='container-fluid sidebar')
+          block sidebar
+            ul(class='sidebar-nav')
+              li.sidebar-item
+                a.active(href='/catalog/') Home
+              li.sidebar-item
+                a(href='/catalog/movies') All Movies
+              li.sidebar-item
+                a(href='/catalog/directors') All Directors
+              li.sidebar-item
+                a(href='/catalog/actors') All Actors
+              li.sidebar-item
+                a(href='/catalog/genres') All genres
+              li.sidebar-item
+                a(href='/catalog/moviedvds') All Movie DVDs
+
+                hr
+
+              li.sidebar-item
+                a(href='/catalog/director/create') Create new Director
+              li.sidebar-item
+                a(href='/catalog/genre/create') Create new genre
+              li.sidebar-item
+                a(href='/catalog/actor/create') Create new Actor
+              li.sidebar-item
+                a(href='/catalog/movie/create') Create new Movie
+              li.sidebar-item
+                a(href='/catalog/moviedvd/create') Create new DVD listing
+    main.content
+      block content
