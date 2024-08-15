@@ -44,8 +44,8 @@ exports.movie_create_get = asyncHandler(async (req, res, next) => {
     Director.find().sort({first_name:1}).exec(),
     Genre.find({}).sort({name:1}).exec(),
   ]);
-  console.log(allActors);  
   allActorsUnique=allActors.filter((actor,index)=>allActors.indexOf(actor)===index);
+  console.log(allActorsUnique)
   res.render("movie_form",{
     title: "Create Movie",
     actors:allActorsUnique,
