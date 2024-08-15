@@ -44,6 +44,11 @@ async function genreCreate(index, Genrename) {
   await genre.save();
   genres[index] = genre;
   console.log(`Added genre: ${Genrename}`);
+async function genreCreate(index, name) {
+  const genre = new Genre({ genre: name });
+  await genre.save();
+  genres[index] = genre;
+  console.log(`Added genre: ${name}`);
 }
 
 async function directorCreate(index, first_name, last_name, d_birth, d_death) {

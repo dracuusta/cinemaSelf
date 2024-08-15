@@ -3,9 +3,8 @@ const Actor = require("../models/actor");
 const Genre = require("../models/genre");
 const MovieDVD = require("../models/moviedvd");
 const Director=require("../models/director")
-
 const asyncHandler = require("express-async-handler");
-const actor = require("../models/actor");
+
 
 exports.movie_list = asyncHandler(async (req, res, next) => {
   res.send("Movie list no implemented fsdyet");
@@ -13,7 +12,7 @@ exports.movie_list = asyncHandler(async (req, res, next) => {
 exports.movie_detail = asyncHandler(async (req, res, next) => {
   res.send("Movie detail not implemented yet");
 });
-exports.index = asyncHandler(async (req, res,next) => {
+exports.index = asyncHandler(async (req, res, next) => {
   const [
     numMovies,
     numActors,
