@@ -1,45 +1,60 @@
 extends layout
 
+   
 block content
-  h1.section-title= title
+  h1=title
 
-  form(method='POST' action='')
-    .form-group
-      label(for='title') Title:
-      input#title.form-control(type='text', placeholder='Name of movie' name='title' required='true')
-    
-    .form-group
-      label(for='director') Director:
-      select#director.form-control(name='director' required='true')
-        option(value='') Select Director
+  form(method='POST')
+    div.form-group
+      label(for='name')
+      |
+      strong Title:
+      input#title.form-control(type='text',autocomplete=true, placeholder='Movie name' name='name' required value=(undefined===movie?'':movie.name))
+    div.form-group
+      label(for='date_of_release')
+      |
+      strong Date of Release:
+      input#date_of_release.form-control(type='date', autocomplete=true, name='date_of_release' value=(movie===undefined)?'':movie.date_of_release)
+    div.form-group
+      label(for='synopsis')
+      |
+      strong Synopsis:
+      textarea#synopsis.form-control(type='text',placeholder="This is fight between aliens ..." rows="10"  autocomplete=true, name='synopsis' value=(movie===undefined)?'':movie.synopsis)
+
+    strong Director/'s':
+    div.form-group.checkbox-scroll
+      label(for='Director')
+      |
+      div.actor-checkbox
         for director in directors
-          option(value=director._id) #{director.first_name} #{director.last_name}
-    
-    .form-group
-      label(for='actors') Actor:
-      select#actor.form-control(name='actor' required='true')
-        option(value='') Select Actor
+          div
+            if director.checked
+              input.checkbox-input(type='checkbox', name='director', id=director._id, value=director._id checked)
+            else
+              input.checkbox-input(type='checkbox', name='director', id=director._id, value=director._id)
+            label(for='director._id') &nbsp;#{director.name} 
+    strong Actor/'s':
+    div.form-group.checkbox-scroll
+      label(for='Actor')
+      |
+      div.actor-checkbox
         for actor in actors
-          option(value=actor._id) #{actor.first_name} #{actor.last_name}
-    
-    .form-group
-      label(for='genres') Genre:
-      select#genres.form-control(name='genre' required='true' multiple)
-        option(value='') Select Genre
+          div
+            if actor.checked
+              input.checkbox-input(type='checkbox', name='actor', id=actor._id, value=actor._id checked)
+            else
+              input.checkbox-input(type='checkbox', name='actor', id=actor._id, value=actor._id)
+            label(for='actor._id') &nbsp;#{actor.first_name} #{actor.last_name}
+    strong Genre/'s':
+    div.form-group.checkbox-scroll
+      label(for='Genre')
+      |
+      div.actor-checkbox
         for genre in genres
-          option(value=genre._id) #{genre.name}
-    
-    .form-group
-      label(for='summary') Summary:
-      textarea#summary.form-control(placeholder='Summary' name='summary' required='true')
-    
-    .form-group
-      label(for='isbn') ISBN:
-      input#isbn.form-control(type='text', placeholder='ISBN13' name='isbn' required='true')
-    
-    button.btn.btn-primary(type='submit') Create Movie
-
-  if errors
-    ul
-      for error in errors
-        li!= error.msg
+          div
+            if genre.checked
+              input.checkbox-input(type='checkbox', name='genre', id=genre._id, value=genre._id checked)
+            else
+              input.checkbox-input(type='checkbox', name='genre', id=genre._id, value=genre._id)
+            label(for='genre._id') &nbsp;#{genre.name} 
+    button.btn.btn-primary(type='submit') Submit

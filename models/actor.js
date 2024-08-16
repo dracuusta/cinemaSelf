@@ -8,7 +8,7 @@ const ActorSchema = new Schema({
 });
 
 ActorSchema.virtual("name").get(function(){
-  return `${first_name} ${this.last_name}`
+  return `${this.first_name} ${this.last_name}`
 })
 
 ActorSchema.virtual("url").get(function () {

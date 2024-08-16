@@ -130,6 +130,7 @@ body {
 
 .btn {
   display: inline-block;
+  cursor: grab;
   padding: 10px 20px;
   background-color: #3498db;
   color: #fff;
@@ -266,4 +267,29 @@ hr {
   background-color:orange;
   color:#fff;
 }
+
+.checkbox-scroll{
+	overflow-y:auto;	
+	height:9vh;
+	overflow-x:auto;
+}
+#synopsis{
+  height:10vh;
+}
+.detail-list-item{
+  list-style-type:none;
+  color:black;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+  height:5vh;
+  border:4px solid #2c3e50;
+  border-radius:2px;
+}
+.detail-list-tag{
+display:flex;
+    flex-grow:1;
+    justify-content: center;
+    align-items:center;
+  color:black;
 }

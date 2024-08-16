@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    h1.section-title=title
+    if directors.length
+        ul.index-list
+        each director in directors
+            li.detail-list-item
+                a.detail-list-tag(href=director.url) #{director.name}
+    else
+        p There are no actors

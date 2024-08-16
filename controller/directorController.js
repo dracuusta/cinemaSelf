@@ -1,8 +1,15 @@
 const asyncHandler=require("express-async-handler")
+const Director=require("../models/director")
 
 
 exports.director_list=asyncHandler(async(req,res,next)=>{
-    res.send("Director List not implemented yet")
+  let directors=await Director.find({}).sort({first_name:1});
+  directors=directors.filter((director,ind,self)=>self.map(x=>x.name).indexOf(director.name)===ind);
+  res.render("director_list",{
+    title:"Director List",
+    directors:directors,
+    name:"director_list"
+  })
 })
 exports.director_detail=asyncHandler(async(req,res,next)=>{
     res.send("Director Detail not implemented yet")

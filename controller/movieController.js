@@ -7,7 +7,16 @@ const asyncHandler = require("express-async-handler");
 
 
 exports.movie_list = asyncHandler(async (req, res, next) => {
-  res.send("Movie list no implemented fsdyet");
+  let movies=await Movie.find({}).populate("director").populate("actor").populate("genre").sort({name:1}).exec();
+   movies=Array.from(new Set(movies.map(movie=>movie.name))) 
+                .map(name=>movies.find(a=>a.name===name))
+  res.render("movie_list",{
+        title:"Movie List",
+    movies:movies,
+        name:"movie_list"
+  })
+    
+   
 });
 exports.movie_detail = asyncHandler(async (req, res, next) => {
   res.send("Movie detail not implemented yet");
@@ -36,6 +45,7 @@ exports.index = asyncHandler(async (req, res, next) => {
     genre_count: numGenres,
     moviedvd_count: numMovieDVDs,
     available_moviedvd_count: numAvailableMovieDVDs,
+        name:"index",
   });
 });
 exports.movie_create_get = asyncHandler(async (req, res, next) => {
@@ -44,11 +54,17 @@ exports.movie_create_get = asyncHandler(async (req, res, next) => {
     Director.find().sort({first_name:1}).exec(),
     Genre.find({}).sort({name:1}).exec(),
   ]);
-  allActorsUnique=allActors.filter((actor,index)=>allActors.indexOf(actor)===index);
-  console.log(allActorsUnique)
+  allGenres=allGenres
+    .filter(genre=>genre.name!==undefined)
+    .filter((value,index,self)=>self.map(x=>x.name).indexOf(value.name)==index);
+
+  allActors=allActors.filter((value,index,self)=>self.map(x=>x.name).indexOf(value.name)===index)
+
+  allDirectors=Array.from(new Set(allDirectors.map(d=>d.name)))
+	      .map(name=>allDirectors.find(d=>d.name===name))
   res.render("movie_form",{
     title: "Create Movie",
-    actors:allActorsUnique,
+    actors:allActors,
     directors:allDirectors,
     genres:allGenres,
   })

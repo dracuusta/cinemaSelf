@@ -10,6 +10,7 @@ const MovieSchema = new Schema({
   genre: { type: Schema.Types.ObjectId, ref: "Genre", required: true },
 });
 
+
 MovieSchema.virtual("url").get(function () {
   return `/catalog/movie/${this._id}`;
 });

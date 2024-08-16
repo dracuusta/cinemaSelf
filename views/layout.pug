@@ -9,17 +9,17 @@ html
           block sidebar
             ul(class='sidebar-nav')
               li.sidebar-item
-                a.active(href='/catalog/') Home
+                a(href='/catalog/' class=(name==="index"?'active':undefined)) Home
               li.sidebar-item
-                a(href='/catalog/movies') All Movies
+                a(href='/catalog/movies' class=(name==="movie_list"?'active':undefined)) All Movies
               li.sidebar-item
-                a(href='/catalog/directors') All Directors
+                a(href='/catalog/directors' class=(name==="director_list"?'active':undefined)) All Directors
               li.sidebar-item
-                a(href='/catalog/actors') All Actors
+                a(href='/catalog/actors' class=(name==="actor_list"?'active':undefined)) All Actors
               li.sidebar-item
-                a(href='/catalog/genres') All genres
+                a(href='/catalog/genres' class=(name==="genre_list"?'active':undefined)) All genres
               li.sidebar-item
-                a(href='/catalog/moviedvds') All Movie DVDs
+                a(href='/catalog/moviedvds' class=(name==="moviedvd_list"?'active':undefined)) All Movie DVDs
 
                 hr
 

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1.section-title=title
+
+    if movies.length
+        ul.index-list
+            each movie in movies
+                li.detail-list-item
+                    a.detail-list-tag(href=movie.url) #{movie.name}
+    else
+        p There are no movies available

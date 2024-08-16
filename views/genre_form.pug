@@ -1,0 +1,12 @@
+extends layout
+
+
+block content
+    h1=title
+    form(method='POST')
+        div.form-group
+            label(for='name')
+            |
+            strong Genre Name:
+            input#name.form-control(type='text', autocomplete=true, placeholder="Fantasy", name="name" required value=(undefined===genre?'':genre.name))
+        button.btn.btn-primary(type='submit') Submit
