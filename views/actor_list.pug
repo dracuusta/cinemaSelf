@@ -4,9 +4,9 @@ block content
     h1.section-title=title
 
     if actors.length
-        ul.index-list
+        ul.actor-index-list
             each actor in actors
-                li.detail-list-item
-                    a.detail-list-tag(href=actor.url) #{actor.name}
+                li.actor-list-item
+                    a.actor-list-tag(href=actor.url) #{actor.name}
     else
         p There are no actors available

@@ -4,10 +4,10 @@ block content
     h1.section-title=title
 
     if genres.length
-        ul.index-list
+        ul.actor-index-list
             each genre in genres
-                li.detail-list-item
-                    a.detail-list-tag(href=genre.url) #{genre.name}
+                li.actor-list-item
+                    a.actor-list-tag(href=genre.url) #{genre.name}
     else
         p There are no genres available
 

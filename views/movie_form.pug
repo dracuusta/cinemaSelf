@@ -4,57 +4,66 @@ extends layout
 block content
   h1=title
 
-  form(method='POST')
-    div.form-group
-      label(for='name')
-      |
-      strong Title:
-      input#title.form-control(type='text',autocomplete=true, placeholder='Movie name' name='name' required value=(undefined===movie?'':movie.name))
-    div.form-group
-      label(for='date_of_release')
-      |
-      strong Date of Release:
-      input#date_of_release.form-control(type='date', autocomplete=true, name='date_of_release' value=(movie===undefined)?'':movie.date_of_release)
-    div.form-group
-      label(for='synopsis')
-      |
-      strong Synopsis:
-      textarea#synopsis.form-control(type='text',placeholder="This is fight between aliens ..." rows="10"  autocomplete=true, name='synopsis' value=(movie===undefined)?'':movie.synopsis)
+    form(method='POST')
+      div.form-group
+        label(for='name')
+        |
+        strong Title:
+        input#title.form-control(type='text',autocomplete=true, placeholder='Movie name' name='name' required value=(undefined===movie?'':movie.name))
+      div.form-group
+        label(for='date_of_release')
+        |
+        strong Date of Release:
+        input#date_of_release.form-control(type='date', autocomplete=true, name='date_of_release' value=(movie===undefined)?'':movie.date_of_release)
+      div.form-group
+        label(for='synopsis')
+        |
+        strong Synopsis:
+        textarea#synopsis.form-control(type='text',placeholder="This is fight between aliens ..." rows="10"  autocomplete=true, name='synopsis' value=(movie===undefined)?'':movie.synopsis)
 
-    strong Director/'s':
-    div.form-group.checkbox-scroll
-      label(for='Director')
-      |
-      div.actor-checkbox
-        for director in directors
-          div
-            if director.checked
-              input.checkbox-input(type='checkbox', name='director', id=director._id, value=director._id checked)
-            else
-              input.checkbox-input(type='checkbox', name='director', id=director._id, value=director._id)
-            label(for='director._id') &nbsp;#{director.name} 
-    strong Actor/'s':
-    div.form-group.checkbox-scroll
-      label(for='Actor')
-      |
-      div.actor-checkbox
-        for actor in actors
-          div
-            if actor.checked
-              input.checkbox-input(type='checkbox', name='actor', id=actor._id, value=actor._id checked)
-            else
-              input.checkbox-input(type='checkbox', name='actor', id=actor._id, value=actor._id)
-            label(for='actor._id') &nbsp;#{actor.first_name} #{actor.last_name}
-    strong Genre/'s':
-    div.form-group.checkbox-scroll
-      label(for='Genre')
-      |
-      div.actor-checkbox
-        for genre in genres
-          div
-            if genre.checked
-              input.checkbox-input(type='checkbox', name='genre', id=genre._id, value=genre._id checked)
-            else
-              input.checkbox-input(type='checkbox', name='genre', id=genre._id, value=genre._id)
-            label(for='genre._id') &nbsp;#{genre.name} 
-    button.btn.btn-primary(type='submit') Submit
+      strong Director:
+      div.form-group
+        label(for='Director')
+        |
+        div
+          select(name='director' class='dropdown-input' value)
+            for director in directors
+              if movie
+                if director._id.toString()===movie.director._id.toString()  
+                  option(class='dropdown-input',value='director._id',selected) #{director.name}
+                else
+                  option(class='dropdown-input',value='director._id') #{director.name}
+              else
+                  option(class='dropdown-input',value='director._id') #{director.name}
+
+
+      strong Actors:
+      div.form-group.checkbox-scroll
+        label(for='Actor')
+        |
+        div.actor-checkbox
+          for actor in actors
+            div
+              if actor.checked
+                input.checkbox-input(type='checkbox', name='actor', id=actor._id, value=actor._id checked)
+              else
+                input.checkbox-input(type='checkbox', name='actor', id=actor._id, value=actor._id)
+              label(for='actor._id') &nbsp;#{actor.first_name} #{actor.last_name}
+      strong Genres:
+      div.form-group.checkbox-scroll
+        label(for='Genre')
+        |
+        div.actor-checkbox
+          for genre in genres
+            div
+              if genre.checked
+                input.checkbox-input(type='checkbox', name='genre', id=genre._id, value=genre._id checked)
+              else
+                input.checkbox-input(type='checkbox', name='genre', id=genre._id, value=genre._id)
+              label(for='genre._id') &nbsp;#{genre.name} 
+      button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1=title
+  form(method='POST')
+    div.form-group
+      label(for='first_name')
+        |
+        strong Director First Name:
+        input.form-control#director-first-name(type='text', autocomplete=true, placeholder='Quintin',name='first_name' required value=(director===undefined)?'':director.first_name)
+    div.form-group
+      label(for='last_name')
+        |
+        strong Director Last Name:
+        input.form-control#director-last-name(type='text', autocomplete=true, placeholder='Tarantino',name='last_name' required value=(director===undefined)?'':director.last_name)
+    div.form-group
+      label(for='date_of_birth')
+      |
+      strong Date of birth:
+      input#date_of_birth.form-control(type='date', autocomplete=true, name='date_of_birth' value=(director===undefined)?'':director.date_of_birth)
+    div.form-group
+      label(for='date_of_death')
+      |
+      strong Date of death:
+      input#date_of_death.form-control(type='date', autocomplete=true, name='date_of_death' value=(director===undefined)?'':director.date_of_death)
+    button.btn.btn-primary(type='submit') Submit

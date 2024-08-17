@@ -1,13 +1,15 @@
-extends layout
-
+extends layout 
 block content
     h1.section-title= title
     if moviedvds.length
-        ul
+        ul.actor-index-list
             each moviedvd in moviedvds
-                li
-                    a(href=moviedvd.url) #{moviedvd.movie.name}
-                    |
-                    span(class=moviedvd.status === 'Available' ? 'text-success' : moviedvd.status === 'Reserved' ? 'text-danger' : 'text-loaned') #{moviedvd.status}
-    else
-        p There are no genre
+                li.actor-list-item(style={'height':'8vh'})
+                   a(href=moviedvd.url)
+                     | #{moviedvd.movie.name}: 
+                     | :
+                     span(class=moviedvd.status === 'Available' ? 'text-success' : moviedvd.status === 'Reserved' ? 'text-danger' : 'text-loaned') #{moviedvd.status} 
+    
+
+    else 
+      p There are no genre

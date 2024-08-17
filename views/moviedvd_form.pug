@@ -1,0 +1,42 @@
+extends layout 
+
+block content
+
+  form(method='POST')
+    div.form-group
+
+    - console.log(movie_list)
+    label(for='movie') Movie:
+      select#movie.form-control(name='movie' required)
+        option(value='') --Please select a movie--
+        for movie in movie_list
+          if selected_movie==movie._id.toString()
+            option(value=movie._id, selected) #{movie.name}
+          else
+            option(value=movie._id) #{movie.name}
+          
+
+    div.form-group
+      label(for='due_date') Due Date:
+      input#session-date.form-control(name='due_date', type='date',)
+
+    div.form-group
+      label(for='status') Status:
+      select#status.form-control(name='status' required)
+        option(value='') --Please Make a Selection--
+        each val in ["Available","Loaned","Reserved"]
+          if moviedvd===undefined||moviedvd.status!=val
+            option(value=val)=val
+          else
+            option(value=val selected)=val
+
+
+
+    button.btn.btn-primary(type='submit') Submit
+
+
+
+  if errors
+    ul
+      for error in errors
+        li!=error.msg

@@ -1,0 +1,31 @@
+extends layout
+
+
+block content
+  div.detail-content
+    h1=title
+
+    p 
+      | #[strong Director name]:
+      |
+      a(href=movie.director.url) #{movie.director.name}
+    p #[strong Date of Release:] #{movie.date_of_release}
+    p #[strong Synopsis:] #{movie.synopsis}
+    p #[strong Genre:] #{movie.genre.name}
+    p #[strong Actors:] 
+      each val,index in movie.actor
+        a(href=val.url) #{val.name}
+        if index<movie.actor.length-1
+          |,&nbsp
+    div.second-movie-row
+      if movieDVD && movieDVD.length>0
+        h2 DVD Status
+          if movieDVD.status=="Available"
+            p.text-success #{movieDVD.status}
+          if movieDVD.status=="Reserved"
+            p.text-danger #{movieDVD.status}
+          if movieDVD.status=="Loaned"
+            p #{movieDVD.status}
+      else
+        p No Movie DVDs avaiable
+

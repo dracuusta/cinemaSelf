@@ -17,7 +17,7 @@ DirectorSchema.virtual("name").get(function () {
 });
 
 DirectorSchema.virtual("url").get(function () {
-  return `/catalog/directors/${this._id}`;
+  return `/catalog/director/${this._id}`;
 });
 
 module.exports = mongoose.model("Director", DirectorSchema);

@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  link(rel="stylesheet", href="/styles/genre.css")
+
+  h1=title
+  h2 Movies in this Genre:
+
+  each val in movie
+    h3=val.name
+    p 
+      | #[strong Director name]:
+      |
+      a(href=val.director.url) #{val.director.name}
+    p #[strong Date of Release:] #{val.date_of_release}
+    p #[strong Synopsis:] #{val.synopsis}
+    p #[strong Genre:] #{genre.name}
+    p #[strong Actors:] 
+      each actorIndividual,index in val.actor
+        a(href=actorIndividual.url) #{actorIndividual.name}
+        if index<val.actor.length-1
+          |,&nbsp
+  hr
+  p
+    a(href=genre.url+'/update') Update Genre
+  p
+    a(href=genre.url+'/delete') Update Genre

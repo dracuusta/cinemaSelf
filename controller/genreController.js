@@ -1,13 +1,13 @@
 const asyncHandler=require("express-async-handler")
 const {body,validationResult}=require("express-validator")
 const Genre=require("../models/genre")
+const Movie=require("../models/movie")
 
 
 exports.genre_list = asyncHandler(async (req, res, next) => {
   let genres=await Genre.find({}).exec();
    genres=Array.from(new Set(genres.map(genre=>genre.name))) 
                 .map(name=>genres.find(a=>a.name===name))
-    console.log(genres)
   res.render("genre_list",{
         title:"Genre List",
     genres:genres,
@@ -15,7 +15,22 @@ exports.genre_list = asyncHandler(async (req, res, next) => {
   })
 })
 exports.genre_detail=asyncHandler(async(req,res,next)=>{
-    res.send("Genre Detail not implemented yet")
+  const [genre,movie]=await Promise.all([
+    Genre.findById(req.params.id).exec(),
+    Movie.find({genre:req.params.id}).populate("actor").populate("director").exec(),
+  ])
+  
+  if(genre==null){
+    const err=new Error("No genre found with the given information");
+    err.status=404;
+    next(err);
+  }
+
+  res.render("genre_detail",{
+    title:genre.name,
+    genre:genre,
+    movie:movie
+  })
 })
 exports.genre_create_get=asyncHandler(async(req,res,next)=>{
     res.render("genre_form",{title:"Create Genre"})
@@ -44,11 +59,9 @@ exports.genre_create_post=[
             /* Data form is valid */
             const genreExists=await Genre.find({name:req.body.name}).collation({locale:"en",strength:2}).exec()
             if(genreExists.length){
-                console.log("here")
                 res.redirect(genreExists.url);
             }
             else{
-            console.log("reached valid")
             await genre.save();
             res.redirect(genre.url);
             }
@@ -58,11 +71,27 @@ exports.genre_create_post=[
 
     })
 ]
+exports.genre_update_get=asyncHandler(async(req,res,next)=>{
+  const [genre,movie]=await Promise.all([Genre.findById(req.params.id).exec(),
+  Movie.find({genre:req.params.id}).populate("actor").populate("director").exec(),
+  ]
+)
+
+  if(genre===null){
+    const error=new Error("Genre with the given id not found");
+    error.status=404;
+    next(error);
+  }
+
+  res.render("genre_form",{
+    title:"Update Genre",
+    genre:genre,
+    movie:movie,
+  })
+  
+})
 exports.genre_update_post=asyncHandler(async(req,res,next)=>{
     res.send("Genre Update Post not implemented yet")
-})
-exports.genre_update_get=asyncHandler(async(req,res,next)=>{
-    res.send("Genre Update Get not implemented yet")
 })
 exports.genre_delete_get=asyncHandler(async(req,res,next)=>{
     res.send("Genre Delete Get implemented yet")

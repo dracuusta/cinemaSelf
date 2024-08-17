@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  div.detail-content
+    h1= title
+
+    p 
+      | #[strong Actor name]: 
+      a(href=actor.url) #{actor.name}
+    p #[strong Date of Birth:] #{actor.date_of_birth ? actor.date_of_birth.toDateString() : 'N/A'}
+    p #[strong Date of Death:] #{actor.date_of_death ? actor.date_of_death.toDateString() : 'N/A'}
+
+      h2 #[strong Movies Acted]
+      if (movie!=0)
+        each val in movie
+          a(href=val.url) #{val.name}
+      else
+        p No Movies Acted
+    
+
