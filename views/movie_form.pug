@@ -14,12 +14,13 @@ block content
         label(for='date_of_release')
         |
         strong Date of Release:
-        input#date_of_release.form-control(type='date', autocomplete=true, name='date_of_release' value=(movie===undefined)?'':movie.date_of_release)
+        input#date_of_release.form-control(type='date', autocomplete=true, name='date_of_release' value=(undefined===movie)?'':movie.date_of_release_yyyy_mm_dd)
       div.form-group
         label(for='synopsis')
         |
         strong Synopsis:
-        textarea#synopsis.form-control(type='text',placeholder="This is fight between aliens ..." rows="10"  autocomplete=true, name='synopsis' value=(movie===undefined)?'':movie.synopsis)
+        textarea#synopsis.form-control(type='text',placeholder="This is fight between aliens ..." rows="10"  autocomplete=true, name='synopsis')
+          |#{movie && movie.synopsis?movie.synopsis:''}
 
       strong Director:
       div.form-group
@@ -44,7 +45,7 @@ block content
         div.actor-checkbox
           for actor in actors
             div
-              if actor.checked
+              if movie && movie.actor.some(movieActor=>movieActor._id.toString()===actor._id.toString())
                 input.checkbox-input(type='checkbox', name='actor', id=actor._id, value=actor._id checked)
               else
                 input.checkbox-input(type='checkbox', name='actor', id=actor._id, value=actor._id)
@@ -56,8 +57,9 @@ block content
         div.actor-checkbox
           for genre in genres
             div
-              if genre.checked
+              if movie && movie.genre._id.toString()===genre._id.toString()
                 input.checkbox-input(type='checkbox', name='genre', id=genre._id, value=genre._id checked)
+
               else
                 input.checkbox-input(type='checkbox', name='genre', id=genre._id, value=genre._id)
               label(for='genre._id') &nbsp;#{genre.name} 

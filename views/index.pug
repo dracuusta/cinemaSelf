@@ -8,25 +8,31 @@ block content
   p The current record counts of various components are as follows.
   
   ul.index-list
-    li.index-list-item(style={'display':'block'}) 
-      a(href='/catalog/movies',class='link-index-list-item'): span.index-list-item-count !{movie_count}
+    li.index-list-item 
+      a(href='/catalog/movies')
+        span.index-list-item-count !{movie_count}
         span.index-list-item-label Movies
-    li.index-list-item(style={'display':'block'})
-      a(href='/catalog/actors',class='link-index-list-item'): span.index-list-item-count !{actor_count}
+    li.index-list-item
+      a(href='/catalog/actors')
+        span.index-list-item-count !{actor_count}
         span.index-list-item-label Actors
-    li.index-list-item(style={'display':'block'})
-      a(href='/catalog/genres',class='link-index-list-item'): span.index-list-item-count !{genre_count}
+    li.index-list-item
+      a(href='/catalog/genres')
+        span.index-list-item-count !{genre_count}
         span.index-list-item-label Genres
-    li.index-list-item(style={'display':'block'},class='link-index-list-item')
-      a(href='/catalog/directors'): span.index-list-item-count !{director_count}
+    li.index-list-item
+      a(href='/catalog/directors')
+        span.index-list-item-count !{director_count}
         span.index-list-item-label Directors    
-    li.index-list-item(style={'display':'block'},class='link-index-list-item')
-      a(href='/catalog/moviedvds'): span.index-list-item-count !{moviedvd_count}
+    li.index-list-item
+      a(href='/catalog/moviedvds')
+        span.index-list-item-count !{moviedvd_count}
         span.index-list-item-label Movie DVDs
-    li.index-list-item(style={'display':'block','width':'15vw'},class='link-index-list-item')
-      a(href='/catalog/moviedvds'): span.index-list-item-count !{available_moviedvd_count}
+    li.index-list-item(style={'width':'15vw'})
+      a(href='/catalog/moviedvds')
+        span.index-list-item-count !{available_moviedvd_count}
         span.index-list-item-label Available Movie DVDs
 
-  .button-group(class="group")
+  .button-group
     a.btn(href="/movies") Browse Movies
     a.btn.btn-secondary(href="/about") About Us

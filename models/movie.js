@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const {DateTime}=require("luxon")
 const Schema = mongoose.Schema;
 
 const MovieSchema = new Schema({
@@ -13,6 +14,9 @@ const MovieSchema = new Schema({
 
 MovieSchema.virtual("url").get(function () {
   return `/catalog/movie/${this._id}`;
+});
+MovieSchema.virtual("date_of_release_yyyy_mm_dd").get(function () {
+  return DateTime.fromJSDate(this.date_of_release).toISODate(); 
 });
 
 module.exports = mongoose.model("Movie", MovieSchema);

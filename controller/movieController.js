@@ -151,10 +151,31 @@ exports.movie_create_post = [
 ]
 
 exports.movie_update_post = asyncHandler(async (req, res, next) => {
-  res.send("Movie Update Post not implemented yet");
-});
+  res.send("movie_update_post not implemented yet");
+})
 exports.movie_update_get = asyncHandler(async (req, res, next) => {
-  res.send("Movie Update Get not implemented yet");
+  let [movie,allActors, allDirectors, allGenres] = await Promise.all([
+    Movie.findById(req.params.id).exec(),
+    Actor.find().exec(),
+    Director.find().sort({ first_name: 1 }).exec(),
+    Genre.find({}).sort({ name: 1 }).exec(),
+  ]);
+  allGenres = allGenres
+    .filter(genre => genre.name !== undefined)
+    .filter((value, index, self) => self.map(x => x.name).indexOf(value.name) == index);
+
+  allActors = allActors.filter((value, index, self) => self.map(x => x.name).indexOf(value.name) === index)
+
+  console.log(movie);
+  allDirectors = Array.from(new Set(allDirectors.map(d => d.name)))
+    .map(name => allDirectors.find(d => d.name === name))
+  res.render("movie_form", {
+    title: "Create Movie",
+    movie:movie,
+    actors: allActors,
+    directors: allDirectors,
+    genres: allGenres,
+  })
 });
 exports.movie_delete_get = asyncHandler(async (req, res, next) => {
   res.send("Movie Delete Get implemented yet");
