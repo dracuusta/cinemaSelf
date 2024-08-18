@@ -3,7 +3,9 @@ block content
     h1.section-title= title
     if moviedvds.length
         ul.actor-index-list
+          -console.log(moviedvds)
             each moviedvd in moviedvds
+              if moviedvd.movie
                 li.actor-list-item(style={'height':'8vh'})
                    a(href=moviedvd.url)
                      | #{moviedvd.movie.name}: 

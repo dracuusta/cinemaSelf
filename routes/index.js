@@ -13,8 +13,7 @@ router.get('/', movieController.index);
 router.get('/movies', movieController.movie_list);
 router.get('/movie/create',movieController.movie_create_get)
 router.post('/movie/create',movieController.movie_create_post)
-router.post('/movie/:id/delete',movieController.movie_create_post)
-router.post('/movie/:id/delete',movieController.movie_delete_get)
+router.get('/movie/:id/delete',movieController.movie_delete_get)
 router.post('/movie/:id/delete',movieController.movie_delete_post)
 router.get('/movie/:id/update',movieController.movie_update_get)
 router.post('/movie/:id/update',movieController.movie_update_post)

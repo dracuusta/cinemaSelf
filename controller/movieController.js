@@ -23,7 +23,6 @@ exports.movie_detail = asyncHandler(async (req, res, next) => {
   let movie = await Movie.findById(req.params.id).populate("actor").populate("genre").populate("director").exec();
   const movieDVDs = await MovieDVD.findOne({ movie: req.params.id }).exec();
 
-  console.log(movie.actor)
 
   if (movie === null) {
     const err = new Error("No movies found with the given info");
@@ -150,9 +149,69 @@ exports.movie_create_post = [
 
 ]
 
-exports.movie_update_post = asyncHandler(async (req, res, next) => {
-  res.send("movie_update_post not implemented yet");
-})
+exports.movie_update_post =[
+  (req,res,next)=>{
+    if(!Array.isArray(req.body.actor)){
+      req.body.actor=
+        typeof req.body.actor==="undefined"?[]:[req.body.actor]
+    }
+    next()
+  },
+  body("name", "Name must have min 3 characters")
+    .trim()
+    .isLength({ min: 3 })
+    .escape(),
+
+  body("synopsis", "Synopsis must be at least 10 characters")
+    .trim()
+    .isLength({ min: 10 })
+    .escape(),
+
+  body("genre.*").escape(),
+  body("actor.*").escape(),
+
+  asyncHandler(async(req,res,next)=>{
+    const errors=validationResult(req);
+
+    const movie = new Movie({
+      name: req.body.name,
+      date_of_release: req.body.date_of_release,
+      synopsis: req.body.synopsis,
+      actor: req.body.actor,
+      director: req.body.director,
+      genre: req.body.genre,
+      _id:req.params.id,
+    });
+    console.log(errors)
+    if(!errors.isEmpty()){
+      const [allActors, allDirectors, allGenres] = await Promise.all([
+        Actor.find({}).sort({ first_name: 1 }).exec(),
+        Director.find({}).sort({ first_name: 1 }).exec(),
+        Genre.find({}).sort({ name: 1 }).exec()
+      ]);
+
+      for (const actor of allActors) {
+        if (movie.actor.includes(actor._id)) {
+          actor.checked = "true"
+
+        }
+      }
+
+      res.render("movie_form", {
+        actors: allActors,
+        directors: allDirectors,
+        genres: allGenres,
+        erros: errors,
+      });
+  return;  
+  }
+  else{
+  const updatedMovie=await Movie.findByIdAndUpdate(req.params.id,movie,{});
+  res.redirect(updatedMovie.url);
+
+  }
+  }),
+]
 exports.movie_update_get = asyncHandler(async (req, res, next) => {
   let [movie,allActors, allDirectors, allGenres] = await Promise.all([
     Movie.findById(req.params.id).exec(),
@@ -166,7 +225,6 @@ exports.movie_update_get = asyncHandler(async (req, res, next) => {
 
   allActors = allActors.filter((value, index, self) => self.map(x => x.name).indexOf(value.name) === index)
 
-  console.log(movie);
   allDirectors = Array.from(new Set(allDirectors.map(d => d.name)))
     .map(name => allDirectors.find(d => d.name === name))
   res.render("movie_form", {
@@ -178,8 +236,15 @@ exports.movie_update_get = asyncHandler(async (req, res, next) => {
   })
 });
 exports.movie_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("Movie Delete Get implemented yet");
+  const movie=await Movie.findById(req.params.id).exec();
+  res.render("movie_delete",{
+    title:"Delete Book",
+    movie:movie
+  })
 });
 exports.movie_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("Movie Delete Post not implemented yet");
+  console.log('movie1')
+  const movie=await Movie.findById(req.params.id).exec();
+  await Movie.findByIdAndDelete(req.body.movieid);
+  res.redirect('/catalog/movies/');
 });

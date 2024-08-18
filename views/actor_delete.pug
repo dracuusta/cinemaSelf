@@ -1,0 +1,9 @@
+extends layout
+
+block content
+
+  form(method='POST')
+    div.form-control
+      input#id(name='actorid' value=actor._id type='hidden')
+
+    button.btn.btn-primary(type='submit') Delete
