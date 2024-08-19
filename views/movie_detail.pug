@@ -5,12 +5,14 @@ block content
   div.detail-content
     h1=title
 
-    p 
-      | #[strong Director name]:
-      |
-      a(href=movie.director.url) #{movie.director.name}
+    if movie.director
+        p 
+          | #[strong Director name]:
+          |
+          a(href=movie.director.url) #{movie.director.name}
     p #[strong Date of Release:] #{movie.date_of_release}
     p #[strong Synopsis:] #{movie.synopsis}
+    if(movie.genre)
     p #[strong Genre:] #{movie.genre.name}
     p #[strong Actors:] 
       each val,index in movie.actor

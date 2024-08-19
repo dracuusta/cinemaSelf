@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    
+    form(method='POST')
+        div.form-group
+            label(for='directorid') Do you really want to delete this director entry?
+            input#directorid.form-control(type='hidden' name='directorid' value=director._id)
+
+            div
+                button.btn.btn-primary(type='submit') Delete
+
+

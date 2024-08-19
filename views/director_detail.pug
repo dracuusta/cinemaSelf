@@ -10,3 +10,9 @@ block content
     p #[strong Date of Birth:] #{director.date_of_birth ? director.date_of_birth.toLocaleDateString() : 'N/A'}
     p #[strong Date of Death:] #{director.date_of_death ? director.date_of_death.toLocaleDateString() : 'N/A'}
 
+  hr
+  p
+    a(href=director.url+'/delete') Delete Director
+  p
+    a(href=director.url+'/update') Update Director
+

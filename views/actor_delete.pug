@@ -2,8 +2,10 @@ extends layout
 
 block content
 
-  form(method='POST')
-    div.form-control
-      input#id(name='actorid' value=actor._id type='hidden')
+    p
+    Do you really want to delete this actor?
 
-    button.btn.btn-primary(type='submit') Delete
+      form(method='POST')
+        input#id(name='actorid' value=actor._id type='hidden')
+
+        button.btn.btn-primary(type='submit') Delete

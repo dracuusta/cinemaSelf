@@ -17,10 +17,11 @@ block content
   div.more-info-dvd
       
     h1 More About this Movie
-    p 
-      | #[strong Director name]:
-      |
-      a(href=movie.director.url) #{movie.director.name}
+    if movie.director
+        p 
+          | #[strong Director name]:
+          |
+          a(href=movie.director.url) #{movie.director.name}
     p #[strong Date of Release:] #{movie.date_of_release}
     p #[strong Synopsis:] #{movie.synopsis}
     p #[strong Genre:] #{movie.genre.name}
@@ -34,4 +35,4 @@ block content
   p
     a(href=movieDVD.url+'/update') Update MovieDVD
   p
-    a(href=movieDVD.url+'/delete') Update MovieDVD
+    a(href=movieDVD.url+'/delete') Delete MovieDVD

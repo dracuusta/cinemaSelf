@@ -90,12 +90,44 @@ exports.genre_update_get=asyncHandler(async(req,res,next)=>{
   })
   
 })
-exports.genre_update_post=asyncHandler(async(req,res,next)=>{
-    res.send("Genre Update Post not implemented yet")
-})
+exports.genre_update_post=[
+
+
+  body("name","Name must be at least 3 character")
+  .trim()
+  .isLength({min:3})
+  .escape(),
+
+  asyncHandler(async(req,res,next)=>{
+    const errors=validationResult(req.params);
+    const genre=new Genre({name:req.body.name,_id:req.params.id})
+
+    if(!errors.isEmpty()){
+      console.log(errors);
+      res.render("genre_form",{
+        title:"Create Genre",
+        genre:genre,
+        errors:errors
+      })
+      return ;
+    }else{
+            console.log("here")
+        const updatedGenre=await Genre.findByIdAndUpdate(req.params.id,genre,{});
+        res.redirect(updatedGenre.url);
+
+    }
+  })
+
+
+]
 exports.genre_delete_get=asyncHandler(async(req,res,next)=>{
-    res.send("Genre Delete Get implemented yet")
+    const genre=await Genre.findById(req.params.id);
+    res.render("genre_delete",{
+        title:"Delete Genre",
+        genre:genre
+    })
 })
 exports.genre_delete_post=asyncHandler(async(req,res,next)=>{
-    res.send("Genre Delete Post not implemented yet")
+    await Genre.findByIdAndDelete(req.params.id);
+    res.redirect('/catalog/genres')
 })

@@ -9,11 +9,11 @@ block content
     label(for='movie') Movie:
       select#movie.form-control(name='movie' required)
         option(value='') --Please select a movie--
-        for movie in movie_list
-          if selected_movie==movie._id.toString()
-            option(value=movie._id, selected) #{movie.name}
-          else
-            option(value=movie._id) #{movie.name}
+            for movie in movie_list
+              if selected_movie==movie._id.toString()
+                option(value=movie._id, selected) #{movie.name}
+              else
+                option(value=movie._id) #{movie.name}
           
 
     div.form-group

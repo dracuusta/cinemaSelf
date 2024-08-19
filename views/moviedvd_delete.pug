@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    
+    form(method='POST')
+        div.form-group
+            label(for='moviedvdid') Do you really want to delete this movie DVD entry?
+            input#moviedvdid.form-control(type='hidden' name='moviedvdid' value=moviedvd._id)
+            div
+                button.btn.btn-primary(type='submit') Delete
+
+

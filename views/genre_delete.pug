@@ -2,8 +2,10 @@ extends layout
 
 block content
 
+  p
+    Do you really want to delete the genre?
+    
   form(method='POST')
-    div.form-control
-      input#id(name='genreid' value=genre._id type='hidden')
+    input#id(name='genreid' value=genre._id type='hidden')
 
     button.btn.btn-primary(type='submit') Delete

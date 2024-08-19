@@ -8,10 +8,10 @@ block content
             label(for='first_name')
             |
             strong First Name:
-            input#name.form-control(type='text', autocomplete=true, placeholder="Ryan", name="first_name" required value=(undefined===actor?'':actor.name))
+            input#name.form-control(type='text', autocomplete=true, placeholder="Ryan", name="first_name" required value=(undefined===actor?'':actor.first_name))
         div.form-group
             label(for='last_name')
             |
             strong Last Name:
-            input#name.form-control(type='text', autocomplete=true, placeholder="Reynolds", name="last_name" required value=(undefined===actor?'':actor.name))
+            input#name.form-control(type='text', autocomplete=true, placeholder="Reynolds", name="last_name" required value=(undefined===actor?'':actor.last_name))
         button.btn.btn-primary(type='submit') Submit
