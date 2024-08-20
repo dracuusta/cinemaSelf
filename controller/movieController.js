@@ -251,9 +251,11 @@ exports.movie_update_get = asyncHandler(async (req, res, next) => {
 });
 exports.movie_delete_get = asyncHandler(async (req, res, next) => {
   const movie = await Movie.findById(req.params.id).exec();
+  const movieDVDs=await MovieDVD.find({movie:req.params.id}).populate("movie").exec();
   res.render("movie_delete", {
     title: "Delete Book",
     movie: movie,
+    movieDVD:movieDVDs,
   });
 });
 exports.movie_delete_post = asyncHandler(async (req, res, next) => {

@@ -1,11 +1,20 @@
 extends layout
 
 block content
+  if movieDVD.length
+    p Before deleting movies delete the following instances:
+    #{movieDVD.movie}
+    if movieDVD.movie
+      p=movieDVD.movie.name
+      p=movieDVD.status
+      
 
-  p
-    Do you really want to delete the movie?
-    
-    form(method='POST')
-      div.form-group
-        input#id.form-control(type='hidden' name='movieid' value=movie._id)
-      button.btn.btn-primary(type='submit') Delete
+
+  else
+    p
+      Do you really want to delete the movie?
+      
+      form(method='POST')
+        div.form-group
+          input#id.form-control(type='hidden' name='movieid' value=movie._id)
+        button.btn.btn-primary(type='submit') Delete
